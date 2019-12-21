@@ -87,3 +87,7 @@ body {
   padding-top: 76px;
    min-height: calc(100% - 24px)
  }
+
+ @media only screen and (min-width : 1200px) {
+    .container { max-width: 80% } 
+}
