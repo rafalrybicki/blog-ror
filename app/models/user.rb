@@ -11,4 +11,5 @@ class User < ApplicationRecord
            :case_sensitive => false
          }
   has_many :articles, dependent: :destroy
+  has_many :comments, dependent: :destroy
 end

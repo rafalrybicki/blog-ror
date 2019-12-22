@@ -1,0 +1,13 @@
+<%= form_with(model: [ @article, @article.comments.build ], local: true) do |form| %>
+  <p>
+    <%= form.label :comment %><br>
+    <%= form.text_field :comment %>
+  </p>
+  <% if current_user.id? %>
+    <%= form.hidden_field :user_id, value: current_user.id %>
+  <% end %>
+  <%= form.hidden_field :article_id, value: @article.id %>
+  <p>
+    <%= form.submit %>
+  </p>
+<% end %>
