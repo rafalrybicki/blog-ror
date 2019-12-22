@@ -5,7 +5,12 @@ class ArticlesController < ApplicationController
   # GET /articles
   # GET /articles.json
   def index
-    @articles = Article.order(created_at: :desc).paginate(:page => params[:page], :per_page => 9)
+    if params[:user]
+      @username = User.find(params[:user]).username
+      @articles = Article.where(user: params[:user]).order(created_at: :desc).paginate(:page => params[:page], :per_page => 9)
+    else
+      @articles = Article.order(created_at: :desc).paginate(:page => params[:page], :per_page => 9)
+    end
   end
 
   # GET /articles/1
