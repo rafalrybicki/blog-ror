@@ -10,5 +10,5 @@ class User < ApplicationRecord
          :uniqueness => {
            :case_sensitive => false
          }
-  has_many :articles
+  has_many :articles, dependent: :destroy
 end
