@@ -5,22 +5,41 @@ s<div class="container">
     </div>
   <% end %>
   <div class="row">
-    <% @articles.each do |article| %>
-      <div class="col-md-4">
-        <div class="card mb-4">
-          <img class="card-img-top" src="https://cdn.pixabay.com/photo/2019/12/17/05/52/forest-floor-4700814_960_720.jpg" alt="Card image cap">
-          <div class="card-body">
-              <h5 class="card-title"><%= article.title %></h5>
-              <p class="card-text"><%= article.content.truncate(160) %></p>
-              <p><%= article.created_at.strftime("%B %d, %Y") %> by <%= link_to article.user.username, root_path(user: article.user_id), method: :get %></p>
-              <%= link_to "Continue reading", article_path(article), class: "btn btn-primary" %>
-              <%= link_to 'Show', article %>
-              <%= link_to 'Edit', edit_article_path(article) %>
-              <%= link_to 'Destroy', article, method: :delete, data: { confirm: 'Are you sure?' } %>
-            </div>
+    <div class="col-md-10 d-flex flex-wrap">
+      <% @articles.each do |article| %>
+        <div class="col-md-4">
+          <div class="card mb-4">
+            <img class="card-img-top" src="https://cdn.pixabay.com/photo/2019/12/17/05/52/forest-floor-4700814_960_720.jpg" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title"><%= article.title %></h5>
+                <p class="card-text"><%= article.content.truncate(160) %></p>
+                <p><%= article.created_at.strftime("%B %d, %Y") %> by <%= link_to article.user.username, root_path(user: article.user_id), method: :get %></p>
+                <%= link_to "Continue reading", article_path(article), class: "btn btn-primary" %>
+                <%= link_to 'Show', article %>
+                <%= link_to 'Edit', edit_article_path(article) %>
+                <%= link_to 'Destroy', article, method: :delete, data: { confirm: 'Are you sure?' } %>
+              </div>
+          </div>
         </div>
+      <% end %>
+    </div>
+    <div class="col-md-2">
+      <div class="card">
+        <div class="card-header">
+          <h3>Categories</h3>
+        </div>
+        <ul class="list-group list-group-flush">
+          <% @categories.each do |c| %>
+            <li class="list-group-item">
+              <h6>
+                <%= link_to c.category, root_path(category: c.id)%> <span class="badge badge-primary badge-pill"><%= c.articles.count %></span>
+              </h6>
+            </li>
+          <% end %>
+         </ul>
       </div>
-    <% end %>
+    </div>
+
   </div>
   <div class="row">
     <div class="digg_pagination mr-auto ml-auto mb-4">

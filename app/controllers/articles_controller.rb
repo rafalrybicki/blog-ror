@@ -5,7 +5,10 @@ class ArticlesController < ApplicationController
   # GET /articles
   # GET /articles.json
   def index
-    if params[:user]
+    @categories = Category.all
+    if params[:category]
+      @articles = Article.where(category_id: params[:category]).order(created_at: :desc).paginate(:page => params[:page], :per_page => 9)
+    elsif params[:user]
       @username = User.find(params[:user]).username
       @articles = Article.where(user: params[:user]).order(created_at: :desc).paginate(:page => params[:page], :per_page => 9)
     else
@@ -75,6 +78,6 @@ class ArticlesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def article_params
-      params.require(:article).permit(:title, :content, :user_id)
+      params.require(:article).permit(:title, :content, :user_id, :category_id)
     end
 end

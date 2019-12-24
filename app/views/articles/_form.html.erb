@@ -23,6 +23,10 @@
     <%= form.text_area :content %>
   </div
 
+  <%= form.label :category_id %>
+  <%= form.select :category_id, Category.all.map {|c| [c.category, c.id]} %>
+
+
   <div class="actions">
     <%= form.submit %>
   </div>
