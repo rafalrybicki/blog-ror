@@ -1,19 +1,12 @@
 class ArticlesController < ApplicationController
-  before_action :authenticate_user!, except: [:index, :show]
+  before_action :authenticate_user!, except: [:index, :show, :search]
   before_action :set_article, only: [:show, :edit, :update, :destroy]
 
   # GET /articles
   # GET /articles.json
   def index
     @categories = Category.all
-    if params[:category]
-      @articles = Article.where(category_id: params[:category]).order(created_at: :desc).paginate(:page => params[:page], :per_page => 9)
-    elsif params[:user]
-      @username = User.find(params[:user]).username
-      @articles = Article.where(user: params[:user]).order(created_at: :desc).paginate(:page => params[:page], :per_page => 9)
-    else
-      @articles = Article.order(created_at: :desc).paginate(:page => params[:page], :per_page => 9)
-    end
+    @articles = Article.all.order(created_at: :desc).paginate(:page => params[:page], :per_page => 9)
   end
 
   # GET /articles/1
@@ -28,6 +21,19 @@ class ArticlesController < ApplicationController
 
   # GET /articles/1/edit
   def edit
+  end
+
+  def search
+    if params[:user]
+      @username = User.find(params[:user]).username
+      @articles = Article.where(user: params[:user]).order(created_at: :desc).paginate(:page => params[:page], :per_page => 9)
+    elsif params[:category]
+      @articles = Article.where(category_id: params[:category]).order(created_at: :desc).paginate(:page => params[:page], :per_page => 9)
+    elsif params[:q].blank?
+      @articles = Article.all.paginate(:page => params[:page], :per_page => 9)
+    else
+      @articles = Article.search(params).paginate(:page => params[:page], :per_page => 9)
+    end
   end
 
   # POST /articles

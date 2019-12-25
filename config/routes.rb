@@ -1,9 +1,11 @@
 Rails.application.routes.draw do
   root 'articles#index'
 
+  get '/search', to: 'articles#search'
   resources :categories
   resources :articles do
     resources :comments
+
   end
 
   devise_for :users
