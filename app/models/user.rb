@@ -6,7 +6,11 @@ class User < ApplicationRecord
 
   validates :username,
          :presence => true,
-         length: { minimum: 4, maximum: 20 },
+         length: {
+            maximum: 1,
+            tokenizer: lambda { |str| str.split(/\s+/) },
+            too_long: "must have only one word"
+          },
          :uniqueness => {
            :case_sensitive => false
          }
