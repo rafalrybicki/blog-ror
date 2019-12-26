@@ -20,8 +20,9 @@
   <%= @article.category.category %>
 </p>
 
-<% image_tag(@article.image) %>
-
+<% if @article.image.present? %>
+  <%= image_tag(@article.image) %>
+<% end %>
 
 
 
