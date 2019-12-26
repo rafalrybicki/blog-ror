@@ -15,6 +15,10 @@ class Article < ApplicationRecord
     articles
   end
 
+  def thumbnail
+    self.image.variant(resize: '360X240')
+  end
+
   def correct_image
     if image.attached? && !image.content_type.in?(%w(image/jpeg image/jpg image/png))
       errors.add(:image, 'must be a JPEG, JPG or PNG')
@@ -23,6 +27,5 @@ class Article < ApplicationRecord
     elsif image.byte_size > 1.megabytes
       errors.add(:image, "musnt not be larger than 1MB")
     end
-
   end
 end

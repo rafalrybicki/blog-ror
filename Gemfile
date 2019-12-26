@@ -30,6 +30,7 @@ gem 'jquery-rails'
 gem 'devise'
 gem 'will_paginate'
 gem 'mini_magick'
+gem 'image_processing'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
