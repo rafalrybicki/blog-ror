@@ -23,9 +23,13 @@
     <%= form.text_area :content %>
   </div
 
+  <div class="field">
+    <%= form.label :image %>
+    <%= form.file_field :image %>
+  </div>
+
   <%= form.label :category_id %>
   <%= form.select :category_id, Category.all.map {|c| [c.category, c.id]} %>
-
 
   <div class="actions">
     <%= form.submit %>
