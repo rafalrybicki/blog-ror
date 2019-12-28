@@ -1,8 +1,8 @@
 <% if params[:edited].to_i == comment.id %>
-  <%= form_with(model: @comment, url: article_comment_path(id: comment.id, article_id: comment.article_id), method: :patch) do |form| %>
+  <%= form_with(url: article_comment_path(@article, comment), method: :patch) do |form| %>
     <p>
-      <%= form.label :comment %><br>
-      <%= form.text_field :comment, value: comment.comment %>
+      <%= form.label :content %><br>
+      <%= form.text_field :content, value: comment.content %>
     </p>
     <p>
       <%= form.submit %>
@@ -19,6 +19,6 @@
     <%= comment.comment %>
   </p>
 
-  <%= link_to 'Destroy Comment', article_comment_path(id: comment.id, article_id: comment.article_id), method: :delete, data: { confirm: 'Are you sure?' } %>
+  <%= link_to 'Destroy Comment', article_comment_path(@article, comment), method: :delete, data: { confirm: 'Are you sure?' } %>
   <%= link_to "Edit", :edited => comment.id %>
 <% end %>

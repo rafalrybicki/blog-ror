@@ -1,16 +1,15 @@
 class CommentsController < ApplicationController
   before_action :authenticate_user!
-  def create
-    @article = Article.find(params[:article_id])
-    @comment = @article.comments.create(comment_params)
-    redirect_to article_path(@article)
+  before_action :set_article
 
+  def create
+    @comment = @article.comments.create(comment_params)
+    redirect_to @article
   end
 
   def update
-    @article = Article.find(params[:article_id])
-    @comment = Comment.find(params[:id])
-    if @comment.update(comment: params[:comment])
+    @comment = @article.comments.find(params[:id])
+    if @comment.update(comment_params)
       redirect_to @article, notice: 'Article was successfully updated.'
     else
       redirect_to @article, notice: 'Article was not updated. Try again later'
@@ -18,14 +17,17 @@ class CommentsController < ApplicationController
   end
 
   def destroy
-    @article = Article.find(params[:article_id])
-    @comment = Comment.find(params[:id])
+    @comment = @article.comments.find(params[:id])
     @comment.destroy
     redirect_to article_path(@article)
   end
 
   private
     def comment_params
-      params.require(:comment).permit(:comment, :user_id, :article_id,)
+      params.require(:comment).permit(:comment, :article_id, :user_id)
+    end
+
+    def set_article
+      @article = Article.find(params[:article_id])
     end
 end
