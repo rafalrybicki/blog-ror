@@ -1,0 +1,16 @@
+<div class="row">
+  <div class="card w-100">
+    <div class="card-header">
+      <h3>Categories</h3>
+    </div>
+    <ul class="list-group list-group-flush">
+      <% @categories.each do |c| %>
+        <li class="list-group-item">
+          <h6>
+            <%= link_to c.category, search_path(category: c.id)%> <span class="badge badge-primary badge-pill"><%= c.articles.count %></span>
+          </h6>
+        </li>
+      <% end %>
+     </ul>
+  </div>
+</div>

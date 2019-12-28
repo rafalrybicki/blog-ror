@@ -9,7 +9,7 @@
     <% end %>
   </div>
   <div class="row">
-    <div class="col-md-10 d-flex flex-wrap">
+    <div class="col-md-9 d-flex flex-wrap">
       <% @articles.each do |article| %>
         <div class="col-md-4">
           <div class="card mb-4">
@@ -29,6 +29,7 @@
     </div>
     <div class="col-md-2">
       <%= render 'search_form' %>
+      <%= render 'categories' %>
     </div>
 
   </div>

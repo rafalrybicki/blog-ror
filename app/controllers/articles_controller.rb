@@ -24,9 +24,12 @@ class ArticlesController < ApplicationController
   end
 
   def search
+    @categories = Category.all
     if params[:user]
       @username = User.find(params[:user]).username
       @articles = Article.where(user: params[:user]).order(created_at: :desc).paginate(:page => params[:page], :per_page => 9)
+      # @categories = Category.includes(:articles).where(articles: {user_id: 1})
+
     elsif params[:category]
       @articles = Article.where(category_id: params[:category]).order(created_at: :desc).paginate(:page => params[:page], :per_page => 9)
     elsif params[:q].blank?
@@ -34,6 +37,7 @@ class ArticlesController < ApplicationController
     else
       @articles = Article.search(params).paginate(:page => params[:page], :per_page => 9)
     end
+
   end
 
   # POST /articles
