@@ -33,5 +33,9 @@
 <%= render 'comments/form' %>
 
 
-<%= link_to 'Edit', edit_article_path(@article) %> |
+<% if current_user && (current_user == @article.user || current_user.admin) %>
+  <%= link_to 'Edit', edit_article_path(@article) %>
+  <%= link_to 'Destroy', article_path(@article), method: :delete, data: { confirm: 'Are you sure?' } %>
+<% end %>
+
 <%= link_to 'Back', articles_path %>

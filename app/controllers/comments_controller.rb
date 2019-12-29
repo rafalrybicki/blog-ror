@@ -8,8 +8,14 @@ class CommentsController < ApplicationController
   end
 
   def update
-    @comment = @article.comments.find(params[:id])
-    if @comment.update(comment_params)
+    # @comment = Comment.find(params[:id])
+    # if @comment.update(comment_params)
+    #   redirect_to @article, notice: 'Article was successfully updated.'
+    # else
+    #   redirect_to @article, notice: 'Article was not updated. Try again later'
+    # end
+    @comment = Comment.find(params[:id])
+    if @comment.update(content: params[:content])
       redirect_to @article, notice: 'Article was successfully updated.'
     else
       redirect_to @article, notice: 'Article was not updated. Try again later'
@@ -24,7 +30,7 @@ class CommentsController < ApplicationController
 
   private
     def comment_params
-      params.require(:comment).permit(:comment, :article_id, :user_id)
+      params.require(:comment).permit(:content, :article_id, :user_id)
     end
 
     def set_article
