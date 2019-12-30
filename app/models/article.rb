@@ -3,6 +3,7 @@
   belongs_to :category
   has_many :comments, dependent: :destroy
   has_one_attached :image
+  has_rich_text :content
 
   validates :title, presence: true, length: { in: 3..60 }
   validates :content, presence: true, length: { minimum: 10}
