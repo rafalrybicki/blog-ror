@@ -84,8 +84,18 @@ body {
 }
 
 .root-container {
-  padding-top: 76px;
-  min-height: calc(100% - 24px)
+  padding-top: 80px;
+  min-height: calc(100% - 20px)
+ }
+
+ aside {
+   width: 13.333333333vw;
+   position: fixed;
+   top: 136px;
+   left: 0;
+   margin-left: 76.666666667vw
+
+
  }
 
  @media only screen and (min-width : 1200px) {
