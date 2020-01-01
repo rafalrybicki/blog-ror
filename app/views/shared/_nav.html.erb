@@ -11,7 +11,7 @@
             <%= link_to 'New Article', new_article_path, class: 'nav-link' %>
           </li>
           <li class="nav-item">
-            <%= link_to 'My Articles', root_path, class: 'nav-link' %>
+            <%= link_to (current_user.admin ? 'All articles': 'My articles'), all_path, class: 'nav-link' %>
           </li>
           <li class="nav-item">
             <%= link_to 'Logout', destroy_user_session_path, method: :delete, class: 'nav-link' %>

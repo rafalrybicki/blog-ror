@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   root 'articles#index'
 
   get :search, to: 'articles#search'
+  get :all, to: 'articles#all'
   resources :categories
   resources :articles do
     resources :comments

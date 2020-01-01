@@ -40,6 +40,14 @@ class ArticlesController < ApplicationController
 
   end
 
+  def all
+    if current_user.admin
+      @articles = Article.all.order(created_at: :desc)
+    else
+      @articles = Article.where(user: current_user.id)
+    end
+  end
+
   # POST /articles
   # POST /articles.json
   def create
@@ -75,7 +83,7 @@ class ArticlesController < ApplicationController
   def destroy
     @article.destroy
     respond_to do |format|
-      format.html { redirect_to articles_url, notice: 'Article was successfully destroyed.' }
+      format.html { redirect_back fallback_location: articles_url, notice: 'Article was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

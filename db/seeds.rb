@@ -7,8 +7,8 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 
-User.create!(username: 'Rafał', password: 'password', password_confirmation: 'password', email: 'rafarybicki@gmail.com', admin: true)
-User.create!(username: 'TestUser', password: 'password', password_confirmation: 'password', email: 'test@gmail.com', admin: false)
+User.create!(username: 'admin', password: 'password', password_confirmation: 'password', email: 'admin@gmail.com', admin: true)
+User.create!(username: 'test_user', password: 'password', password_confirmation: 'password', email: 'test@gmail.com', admin: false)
 
 Category.create!(category: 'Ruby on Rails')
 Category.create!(category: 'Javascript')
