@@ -24,6 +24,6 @@
   end
 
   def article_img
-    self.image.variant(resize: '900')
+    self.image.variant(resize: '450')
   end
 end

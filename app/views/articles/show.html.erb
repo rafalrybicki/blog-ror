@@ -1,41 +1,39 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Title:</strong>
-  <%= @article.title %>
-</p>
+<div class="container">
+  <h1><%= @article.title %></h1>
+  <p>
+    <%= @article.created_at.strftime("%B %d, %Y") %> by <%= link_to @article.user.username, search_path(user: @article.user_id) %>
+    <% if current_user && (current_user == @article.user || current_user.admin) %>
+      <%= link_to 'Edit', edit_article_path(@article), class: "ml-5" %>
+      <%= link_to 'Destroy', article_path(@article), method: :delete, data: { confirm: 'Are you sure?' }, class: "ml-1" %>
+    <% end %>
+  </p>
 
-<p>
-  <strong>Content:</strong>
-  <%= @article.content %>
-</p>
+  <div class="mb-4">
+    <% if @article.image.present? %>
+      <%= image_tag(@article.article_img, class: 'float-right ml-3 mb-2') %>
+    <% end %>
+    <%= @article.content %>
+  </div>
 
-<p>
-  <strong>User:</strong>
-  <%= @article.user.username %>
-</p>
+  <%= render @article.comments %>
 
-<p>
-  <strong>Category:</strong>
-  <%= @article.category.category %>
-</p>
+  <%= render 'comments/form' %>
+</div>
 
-<% if @article.image.present? %>
-  <%= image_tag(@article.article_img) %>
-<% end %>
+<script>
+  const newComment = document.querySelector('#comment_content');
+  const btn = document.querySelector('input[type="submit"]');
 
+  function toggleBtn(e) {
+    if(newComment.value.trim() == "") {
+      newComment.value = ""
+      btn.disabled = true
+    } else {
+      btn.disabled = false
+    }
+  }
+  newComment.addEventListener('input', toggleBtn)
 
-
-<h2>Comments</h2>
-<%= render @article.comments %>
-
-<h2>Add a comment:</h2>
-<%= render 'comments/form' %>
-
-
-<% if current_user && (current_user == @article.user || current_user.admin) %>
-  <%= link_to 'Edit', edit_article_path(@article) %>
-  <%= link_to 'Destroy', article_path(@article), method: :delete, data: { confirm: 'Are you sure?' } %>
-<% end %>
-
-<%= link_to 'Back', articles_path %>
+</script>

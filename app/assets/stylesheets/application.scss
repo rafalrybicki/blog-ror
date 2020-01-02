@@ -68,7 +68,6 @@ html {
   margin: 0 !important
 }
 
-
 body {
   height: 100vh;
   overflow-x: hidden;
@@ -89,13 +88,30 @@ body {
  }
 
  aside {
-   width: 13.333333333vw;
+   width: calc(13.333333333vw - 30px);
    position: fixed;
    top: 136px;
    left: 0;
    margin-left: 76.666666667vw
  }
 
+nav {
+  padding-left: 10vw !important;
+  padding-right: 10vw !important
+}
+
+.trix-content div {
+  text-align: justify;
+}
+
+.comment a {
+  display: inline-block;
+  margin-top: 5px
+}
+
+textarea {
+    overflow: auto;
+}
 
  @media only screen and (min-width : 1200px) {
     .container { max-width: 80% }
