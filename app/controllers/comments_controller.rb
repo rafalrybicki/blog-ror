@@ -4,7 +4,16 @@ class CommentsController < ApplicationController
 
   def create
     @comment = @article.comments.create(comment_params)
-    redirect_to @article
+    @comment.save
+    # respond_to do |format|
+    #   if @comment.save
+    #     format.html { redirect_to @article }
+    #     format.js
+    #     format.json { render json: @comment, status: :created, location: @article }
+    #   else
+    #     format.html { render :new }
+    #   end
+    # end
   end
 
   def update
@@ -26,6 +35,12 @@ class CommentsController < ApplicationController
     @comment = @article.comments.find(params[:id])
     @comment.destroy
     redirect_to article_path(@article)
+
+    respond_to do |format|
+      format.js
+      format.html { redirect_to root_path, notice: 'Comment was successfully deleted.' }
+      format.json { head :no_content }
+    end
   end
 
   private

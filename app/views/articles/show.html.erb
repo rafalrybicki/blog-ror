@@ -6,7 +6,7 @@
     <%= @article.created_at.strftime("%B %d, %Y") %> by <%= link_to @article.user.username, search_path(user: @article.user_id) %>
     <% if current_user && (current_user == @article.user || current_user.admin) %>
       <%= link_to 'Edit', edit_article_path(@article), class: "ml-5" %>
-      <%= link_to 'Destroy', article_path(@article), method: :delete, data: { confirm: 'Are you sure?' }, class: "ml-1" %>
+      <%= link_to 'Destroy', article_path(@article), method: :delete, data: { confirm: 'Are you sure?' }, class: "ml-1 text-danger" %>
     <% end %>
   </p>
 
@@ -17,10 +17,15 @@
     <%= @article.content %>
   </div>
 
-  <%= render @article.comments %>
-
-  <%= render 'comments/form' %>
+  <div id="comments">
+      <%= render @article.comments %>
+  </div>
+  <% if !params[:edited] %>
+    <%= render 'comments/form' %>
+  <% end %>
 </div>
+
+
 
 <script>
   const newComment = document.querySelector('#comment_content');
@@ -35,5 +40,4 @@
     }
   }
   newComment.addEventListener('input', toggleBtn)
-
 </script>

@@ -1,5 +1,5 @@
 <div class="">
-  <%= form_with(model: [ @article, @article.comments.build ], local: true) do |form| %>
+  <%= form_with(model: [ @article, @article.comments.build ], remote: true) do |form| %>
 
     <%= form.text_area :content, class: "form-control", rows: "5", placeholder: "Add new comment" %>
 

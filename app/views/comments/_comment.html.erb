@@ -19,7 +19,7 @@
           <%= link_to "Edit", :edited => comment.id %>
         <% end %>
         <% if current_user == comment.user || current_user.admin %>
-          <%= link_to 'Destroy', article_comment_path(@article, comment), method: :delete, data: { confirm: 'Are you sure?' } %>
+          <%= link_to 'Destroy', article_comment_path(@article, comment), method: :delete, data: { confirm: 'Are you sure?' }, remote: true, class: "text-danger" %>
         <% end %>
     <% end %>
     <p class="ml-3">
