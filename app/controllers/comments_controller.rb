@@ -4,6 +4,7 @@ class CommentsController < ApplicationController
 
   def create
     @comment = @article.comments.create(comment_params)
+    @comment.user_id = current_user.id
     @comment.save
     # respond_to do |format|
     #   if @comment.save
@@ -34,13 +35,6 @@ class CommentsController < ApplicationController
   def destroy
     @comment = @article.comments.find(params[:id])
     @comment.destroy
-    redirect_to article_path(@article)
-
-    respond_to do |format|
-      format.js
-      format.html { redirect_to root_path, notice: 'Comment was successfully deleted.' }
-      format.json { head :no_content }
-    end
   end
 
   private

@@ -1,14 +1,6 @@
-<div class="">
+<div>
   <%= form_with(model: [ @article, @article.comments.build ], remote: true) do |form| %>
-
     <%= form.text_area :content, class: "form-control", rows: "5", placeholder: "Add new comment" %>
-
-    <% if current_user %>
-      <%= form.hidden_field :user_id, value: current_user.id %>
-    <% end %>
-
-    <%= form.hidden_field :article_id, value: @article.id %>
-
     <%= form.submit class: 'btn btn-primary mt-3 mb-5', disabled: true %>
   <% end %>
 </div>
