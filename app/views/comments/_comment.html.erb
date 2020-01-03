@@ -1,29 +1,14 @@
-<% if params[:edited].to_i == comment.id %>
-  <%= form_with(model: @comment, url: article_comment_path(@article, comment), local: true, method: :patch) do |form| %>
-
-    <p>
-      <%= form.label :content %><br>
-      <%= form.text_field :content, value: comment.content %>
-    </p>
-    <p>
-      <%= form.submit %>
-    </p>
-  <% end %>
-<% else %>
-
 <div id="comment-<%= comment.id %>">
-  <%= comment.user.username %><small><%= comment.created_at.strftime("%B %d, %Y") %></small>
+  <%= comment.user.username %> <small><%= comment.created_at.strftime("%B %d, %Y") %></small>
   <% if current_user %>
-      <% if current_user == comment.user %>
-        <%= link_to "Edit", :edited => comment.id %>
-      <% end %>
-      <% if current_user == comment.user || current_user.admin %>
-        <%= link_to 'Destroy', article_comment_path(@article, comment), method: :delete, data: { confirm: 'Are you sure?' }, remote: true, class: "text-danger" %>
-      <% end %>
+    <% if current_user == comment.user %>
+      <%= link_to "Edit", edit_article_comment_path(@article, comment), remote: true %>
+    <% end %>
+    <% if current_user == comment.user || current_user.admin %>
+      <%= link_to 'Destroy', article_comment_path(@article, comment), method: :delete, data: { confirm: 'Are you sure?' }, remote: true, class: "text-danger" %>
+    <% end %>
   <% end %>
   <p class="ml-3">
     <%= comment.content %>
   </p>
 </div>
-
-<% end %>

@@ -1,0 +1,4 @@
+document.querySelector("#inline_form").remove()
+document.querySelector("#comment-<%= @comment.id %>").innerHTML = "<%= j render @comment %>"
+document.querySelector("#comment-<%= @comment.id %>").style.display = 'block'
+document.querySelector("#comment-form").style.display = 'block'

@@ -6,30 +6,15 @@ class CommentsController < ApplicationController
     @comment = @article.comments.create(comment_params)
     @comment.user_id = current_user.id
     @comment.save
-    # respond_to do |format|
-    #   if @comment.save
-    #     format.html { redirect_to @article }
-    #     format.js
-    #     format.json { render json: @comment, status: :created, location: @article }
-    #   else
-    #     format.html { render :new }
-    #   end
-    # end
+  end
+
+  def edit
+    @comment = @article.comments.find(params[:id])
   end
 
   def update
-    # @comment = Comment.find(params[:id])
-    # if @comment.update(comment_params)
-    #   redirect_to @article, notice: 'Article was successfully updated.'
-    # else
-    #   redirect_to @article, notice: 'Article was not updated. Try again later'
-    # end
     @comment = Comment.find(params[:id])
-    if @comment.update(content: params[:content])
-      redirect_to @article, notice: 'Article was successfully updated.'
-    else
-      redirect_to @article, notice: 'Article was not updated. Try again later'
-    end
+    @comment.update(comment_params)
   end
 
   def destroy

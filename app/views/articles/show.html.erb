@@ -18,11 +18,9 @@
   </div>
 
   <div id="comments">
-      <%= render @article.comments %>
+      <%= render @article.comments.order(created_at: :asc) %>
   </div>
-  <% if !params[:edited] %>
     <%= render 'comments/form' %>
-  <% end %>
 </div>
 
 
