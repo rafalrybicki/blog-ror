@@ -11,6 +11,7 @@
       </div>
     <% end %>
 
+  <h3><%= @image_path  %></h3>
     <div class="form-row" style="margin-bottom: 16px">
       <div class="col-6">
         <%= form.label :title %>
@@ -23,7 +24,15 @@
 
       <div class="col">
         <%= form.label :image , style: "margin-bottom: 12px"%>
-        <%= form.file_field :image, class: "form-control-file" %>
+        <div class="d-flex">
+          <% if article.image && article.errors.any? %>
+            <%= image_tag(request.base_url + url_for(article.image_attachment), height: '35', style: "margin-top: -3px; margin-right: 10px", id: "img") %>
+          <% elsif article.image.attached? %>
+            <%= image_tag(article.thumbnail, class: "form-img", id: "form-img") %>
+          <% end %>
+          <%= form.file_field :image, class: "form-control-file" %>
+        </div>
+
       </div>
     </div>
     <div class="form-group">
@@ -36,5 +45,25 @@
     </div>
 
   <% end %>
-
 </div>
+
+<script>
+  function readURL(input) {
+    if (input.files && input.files[0]) {
+      var reader = new FileReader();
+      reader.onload = function(e) {
+        if($('#form-img').length){
+          $('#form-img').attr('src', e.target.result);
+        } else {
+          $('<img id="form-img" class="form-img">').insertBefore("#article_image");
+          $("#form-img").attr('src', e.target.result);
+        }
+      }
+      reader.readAsDataURL(input.files[0]);
+    }
+  }
+
+  $("#article_image").change(function() {
+    readURL(this);
+  });
+  </script>

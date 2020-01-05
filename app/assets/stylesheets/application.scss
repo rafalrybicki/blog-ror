@@ -113,6 +113,12 @@ textarea {
     overflow: auto;
 }
 
+.form-img {
+  margin-top: -3px;
+  margin-right: 10px;
+  height: 35px
+}
+
  @media only screen and (min-width : 1200px) {
     .container { max-width: 80% }
 }

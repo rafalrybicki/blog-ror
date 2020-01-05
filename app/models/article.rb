@@ -26,4 +26,8 @@
   def article_img
     self.image.variant(resize: '450')
   end
+
+  def thumbnail
+    self.image.variant(resize: '60')
+  end
 end
