@@ -2,6 +2,7 @@ document.querySelector("#comment-<%= @comment.id %>").insertAdjacentHTML('aftere
 document.querySelector("#comment-<%= @comment.id %>").style.display = 'none'
 document.querySelector("#comment-form").style.display = 'none'
 
+if (typeof editedComment == 'undefined') {
   const editedComment = document.querySelector('.edited-comment');
   const updateBtn = document.querySelector('input[type="submit"]');
 
@@ -15,3 +16,4 @@ document.querySelector("#comment-form").style.display = 'none'
     }
   }
   editedComment.addEventListener('input', toggleBtn)
+}
