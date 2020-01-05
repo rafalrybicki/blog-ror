@@ -28,8 +28,6 @@ class ArticlesController < ApplicationController
     if params[:user]
       @username = User.find(params[:user]).username
       @articles = Article.where(user: params[:user]).order(created_at: :desc).paginate(:page => params[:page], :per_page => 9)
-      # @categories = Category.includes(:articles).where(articles: {user_id: 1})
-
     elsif params[:category]
       @articles = Article.where(category_id: params[:category]).order(created_at: :desc).paginate(:page => params[:page], :per_page => 9)
     elsif params[:q].blank?
@@ -54,14 +52,10 @@ class ArticlesController < ApplicationController
     @article = Article.new(article_params)
     @article.user_id = current_user.id
 
-    respond_to do |format|
-      if @article.save
-        format.html { redirect_to @article, notice: 'Article was successfully created.' }
-        format.json { render :show, status: :created, location: @article }
-      else
-        format.html { render :new }
-        format.json { render json: @article.errors, status: :unprocessable_entity }
-      end
+    if @article.save
+      redirect_to @article, info: 'Article was successfully created.'
+    else
+      render :new
     end
   end
 
@@ -70,7 +64,7 @@ class ArticlesController < ApplicationController
   def update
     respond_to do |format|
       if @article.update(article_params)
-        format.html { redirect_to @article, notice: 'Article was successfully updated.' }
+        format.html { redirect_to @article, success: 'Article was successfully updated.' }
         format.json { render :show, status: :ok, location: @article }
       else
         format.html { render :edit }
@@ -83,10 +77,7 @@ class ArticlesController < ApplicationController
   # DELETE /articles/1.json
   def destroy
     @article.destroy
-    respond_to do |format|
-      format.html { redirect_to root_path, notice: 'Article was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+      redirect_to root_path, info: 'Article was successfully destroyed.'
   end
 
   private

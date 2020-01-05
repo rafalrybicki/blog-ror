@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Blogror</title>
+    <title>Blog</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -12,10 +12,14 @@
   <body>
     <%= render 'shared/nav' %>
     <div class="root-container">
-      <p class="notice"><%= notice %></p>
-      <p class="alert"><%= alert %></p>
+      <%= render 'shared/messages' %>
       <%= yield %>
     </div>
     <%= render 'shared/footer' %>
+    <script>
+      $('.close').on('click', function () {
+        $('.alert').remove()
+      })
+    </script
   </body>
 </html>

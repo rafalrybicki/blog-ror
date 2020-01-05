@@ -26,7 +26,7 @@
         <%= form.label :image , style: "margin-bottom: 12px"%>
         <div class="d-flex">
           <% if article.image && article.errors.any? %>
-            <%= image_tag(request.base_url + url_for(article.image_attachment), height: '35', style: "margin-top: -3px; margin-right: 10px", id: "img") %>
+            <%= image_tag(request.base_url + url_for(article.image_attachment), class: "form-img", id: "form-img") %>
           <% elsif article.image.attached? %>
             <%= image_tag(article.thumbnail, class: "form-img", id: "form-img") %>
           <% end %>
