@@ -124,7 +124,7 @@ textarea {
 }
 
 .alert {
-  width: 80vw;
+  width: 80%;
   margin-left: 10vw;
 }
 
@@ -154,5 +154,10 @@ textarea {
     top: 136px;
     left: 0;
     margin-left: 80vw
+  }
+
+  .alert {
+  width: 90%;
+  margin-left: 5vw;
   }
 }
