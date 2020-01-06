@@ -30,8 +30,6 @@ class ArticlesController < ApplicationController
       @articles = Article.where(user: params[:user]).order(created_at: :desc).paginate(:page => params[:page], :per_page => 9)
     elsif params[:category]
       @articles = Article.where(category_id: params[:category]).order(created_at: :desc).paginate(:page => params[:page], :per_page => 9)
-    elsif params[:q].blank?
-      @articles = Article.all.paginate(:page => params[:page], :per_page => 9)
     else
       @articles = Article.search(params).paginate(:page => params[:page], :per_page => 9)
     end

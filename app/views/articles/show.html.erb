@@ -8,9 +8,7 @@
     <% end %>
   </p>
   <div class="mb-4">
-    <% if @article.image.present? %>
-      <%= image_tag(@article.article_img, class: 'float-right ml-3 mb-2') %>
-    <% end %>
+    <%= image_tag(@article.article_img, class: 'float-right ml-3 mb-2') %>
     <%= @article.content %>
   </div>
   <div id="comments">
