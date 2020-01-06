@@ -95,6 +95,10 @@ body {
    margin-left: 76.666666667vw
  }
 
+ aside .card-header {
+   padding-right: 0
+ }
+
 nav {
   padding-left: 10vw !important;
   padding-right: 10vw !important
@@ -124,6 +128,27 @@ textarea {
   margin-left: 10vw;
 }
 
+.list-group-item {
+  padding-right: 0
+}
+
  @media only screen and (min-width : 1200px) {
     .container { max-width: 80% }
+}
+
+@media (max-width: 1250px) {
+  nav {
+    padding-left: 5vw !important;
+    padding-right: 5vw !important
+  }
+
+  .container { max-width: 90% }
+
+  aside {
+    width: calc(15vw - 30px);
+    position: fixed;
+    top: 136px;
+    left: 0;
+    margin-left: 80vw
+  }
 }

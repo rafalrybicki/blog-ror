@@ -7,7 +7,6 @@ if (typeof editedComment == 'undefined') {
   const updateBtn = document.querySelector('input[type="submit"]');
 
   function toggleBtn(e) {
-    console.log('adasd')
     if(editedComment.value.trim() == "") {
       editedComment.value = ""
       updateBtn.disabled = true

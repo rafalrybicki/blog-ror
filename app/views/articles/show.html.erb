@@ -7,21 +7,17 @@
       <%= link_to 'Destroy', article_path(@article), method: :delete, data: { confirm: 'Are you sure?' }, class: "ml-1 text-danger" %>
     <% end %>
   </p>
-
   <div class="mb-4">
     <% if @article.image.present? %>
       <%= image_tag(@article.article_img, class: 'float-right ml-3 mb-2') %>
     <% end %>
     <%= @article.content %>
   </div>
-
   <div id="comments">
       <%= render @article.comments.order(created_at: :asc) %>
   </div>
     <%= render 'comments/form' %>
 </div>
-
-
 
 <script>
   const newComment = document.querySelector('#comment_content');
