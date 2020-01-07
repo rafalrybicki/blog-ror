@@ -29,5 +29,13 @@
       btn.disabled = false
     }
   }
+
+  function checkUser(e) {
+    <% if user_signed_in? == false %>
+      location.pathname = 'users/sign_in';
+    <% end %>
+  }
+
   newComment.addEventListener('input', toggleBtn)
+  btn.addEventListener('click', checkUser)
 </script>

@@ -2,6 +2,9 @@ class CommentsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_article
 
+  def index
+  end
+
   def create
     @comment = @article.comments.create(comment_params)
     @comment.user_id = current_user.id

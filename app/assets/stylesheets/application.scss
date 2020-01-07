@@ -73,10 +73,6 @@ body {
   overflow-x: hidden;
 }
 
-.notice, .alert {
-  position: absolute;
-}
-
 .header {
   position: absolute;
   top: 0
@@ -124,6 +120,8 @@ textarea {
 }
 
 .alert {
+  position: absolute;
+  z-index: 100;
   width: 80%;
   margin-left: 10vw;
 }
