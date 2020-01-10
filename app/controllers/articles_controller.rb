@@ -1,6 +1,7 @@
 class ArticlesController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show, :search]
   before_action :set_article, only: [:show, :edit, :update, :destroy]
+  before_action :authorize_user, only: [:destroy, :update, :edit]
 
   # GET /articles
   # GET /articles.json
@@ -87,5 +88,11 @@ class ArticlesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def article_params
       params.require(:article).permit(:title, :content, :user_id, :category_id, :image)
+    end
+
+    def authorize_user
+      if @article.user_id != current_user.id
+        redirect_back fallback_location: @article
+      end
     end
 end
