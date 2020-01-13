@@ -91,7 +91,7 @@ class ArticlesController < ApplicationController
     end
 
     def authorize_user
-      if @article.user_id != current_user.id
+      if current_user.admin == false && @article.user_id != current_user.id 
         redirect_back fallback_location: @article
       end
     end
